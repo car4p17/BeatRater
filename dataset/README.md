@@ -1,0 +1,1 @@
+This folder is used to store the dataset. You can download the dataset by running downloadDataset.py
