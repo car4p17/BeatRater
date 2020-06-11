@@ -1,6 +1,10 @@
 # BeatRater
 This is a deep learning architecture for predicting the rating of a given Beat Saber beatmap
 
+## Libraries
+This project is based on tensorflow you can find out how to install tensorflow below
+* **Tensorflow Version 1.15.0** ([instructions](https://www.tensorflow.org/install/)) 
+
 ## Dataset
 The dataset for this project is scraped from [BeatSaver](https://beatsaver.com/). You can download the dataset by running [downloadDataset.py](downloadDataset.py)
 
