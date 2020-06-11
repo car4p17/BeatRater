@@ -1,0 +1,54 @@
+\documentclass[12pt]{scrartcl}
+\usepackage{hyperref}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+
+
+\title{Beat Rater}
+\author{
+	Carter Walsh
+}
+\subtitle{https://github.com/car4p17/BeatRater}
+\date{6/11/20}
+
+
+\begin{document}
+	\maketitle
+	\section{Abstract}
+	Beat Saber is a recent entry into the rhythm game category with the twist of being for virtual reality. Like Dance Dance Revolution and Guitar Hero before it, though, it runs into issues with limited official tracks and questionable quality user generated maps. In order to try and help with the second part of this problem this paper attempts to create a neural network to predict the quality of a given Beat Saber beat map. I use a dataset pulled from beatsaver.com input into a linear regression artificial neural network to predict the quality rating of the map. 
+	
+	\section{Background}
+	Beat Saber one of the most popular games for modern virtual reality (VR) headsets. It is a rhythm game in which the player hits blocks with two light sabers to the beat of a song. It includes music from some popular artists such as Green Day and Imagine Dragons but also provides users the ability to add their own music and associated beat maps. This ability to add custom songs to the game has resulted in thousands of user generated beat maps of varying quality. Websites such as beatsaver.com allow users to upload their maps as well as rate other users songs based on quality of the beat map. Using this data I created a Deep Neural Network to predict the user rating. This could help users find well made custom songs without the need for hundreds of user ratings as well as help verify the results of machine learning methods used to generate custom beat maps.
+	
+	\section{Related Work}
+	The inspiration for this work is a tool called Beat Sage (beatsage.com). Beat Sage is a tool that uses twin neural networks to generate BeatSaber maps given only the audio file. Though the source code of this project is not available to the public they state on their website that Beat Sage’s architecture is nearly identical to a paper called Dance Dance Convolution.\\
+	
+	Dance Dance Convolution (Donahue et al., 2017) used two neural networks to generate step maps for the game Dance Dance Revolution. They used one neural network to predict the timing of steps and another to pick the direction of each step. They compared their results to the actual step map for thousands of user generated songs. \\
+	
+	(Nasreldin, 2018) Evaluated a variety of Machine Learning techniques on their ability to predict if a song was a hit. He achieved a maximum accuracy of 63\% for this prediction, slightly better than average.
+
+	\section{Dataset}
+	In this paper I pulled my dataset from beatsaver.com, a website that stores thousands of Beat Saber custom maps. I used a python script to pull 18,000 beat maps and their associated metadata from the website. Metadata includes up votes, down votes, total downloads, current popularity, and overall map rating. The map rating is the average of user ratings of the quality of a map. For this project I used the map rating and beat map as input but all of the data is still maintained in the dataset for future use.
+
+	\section{Methods}
+	To predict map ratings I used a linear regression artificial neural network. After some testing I settled on an architecture with an input layer, 3 hidden layers of 1000, 200, and 100 nodes with tanh activation functions, and an output layer of 1 node with a linear activation function. I used L2 regularization to prevent overfitting. My loss function was the squared error since I was trying to predict a single rating. As input I formatted all of the data from each beat map into uniform sized vectors. I used 33\% of my data as testing and the remainder for training. Due to hardware restraints I only trained on a uniformly distributed ~1k beat maps instead of the full 18k.
+
+	\section{Evaluation and Results}
+	The dataset is uniformly distributed between 75\% and 99\% ratings so the average RMSE would be ~5\%. After training the model for 100 epochs my network converged to a testing RMSE of 4.7\% and training RMSE of 4.5\%. This seems to show that there was minimal to no overfitting on the training data. 
+
+	\section{Conclusion}
+	Though these results are not perfect they are at least better than average with roughly the same improvement as (Nasreldin, 2018)’s work. Unfortunately, this improvement is likely not enough for practical use yet. It would seem that only using the beat map without including song data may not be enough to completely predict the maps rating.
+
+	\section{Future Work}
+	Adding in music data to the neural network’s input seems like the next logical step for improvement of this architecture. With access to significantly more RAM/time it may also prove useful to train on a larger portion of the dataset. This seems less likely to provide any major improvements though since the model quickly reached 4.5\% RMSE with this subset of the 
+	
+	\section{Bibliography}
+	Custom Beat Saber Level Generator. (n.d.). Retrieved from https://beatsage.com/ \\
+	
+	Donahue, C., Lipton, Z., \& McAuley, J. (2017). Dance Dance Convolution. Retrieved from https://arxiv.org/pdf/1703.06891.pdf \\
+	
+	Nasreldin, M. (2018, May 14). Song Popularity Predictor. Retrieved from https://towardsdatascience.com/song-popularity-predictor-1ef69735e380
+\end{document}
+
