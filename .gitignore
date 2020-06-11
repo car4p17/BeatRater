@@ -1,7 +1,8 @@
 # Project Specific
 dataset/*
 !dataset/README.md
-
+models/*
+!models/README.md
 
 
 # Byte-compiled / optimized / DLL files
